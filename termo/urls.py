@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from Termo.views.CurrentView import CurrentView
+from termo.views.CurrentView import CurrentView
 
 urlpatterns = [
     path('', CurrentView.as_view(), name='current_view'),
