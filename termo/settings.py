@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
+    'termo',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'webpack_loader',
-    'channels',
 ]
 
 MIDDLEWARE = [
@@ -131,14 +132,12 @@ WEBPACK_LOADER = {
     }
 }
 
-CHANNEL_REDIS_HOST = 'localhost'
 ASGI_APPLICATION = "termo.routing.application"
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [CHANNEL_REDIS_HOST],
-            "symmetric_encryption_keys": [SECRET_KEY],
+            "hosts": [('127.0.0.1', 6379)],
         },
     },
 }

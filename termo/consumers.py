@@ -8,12 +8,7 @@ class CurrentConsumer(AsyncWebsocketConsumer):
         # Called on connection.
         # To accept the connection call:
         await self.accept()
-        # Or accept the connection and specify a chosen subprotocol.
-        # A list of subprotocols specified by the connecting client
-        # will be available in self.scope['subprotocols']
-        await self.accept("subprotocol")
-        # To reject the connection, call:
-        await self.close()
+        await self.send(text_data='Hello consumer')
 
     async def receive(self, text_data=None, bytes_data=None):
         # Called with either text_data or bytes_data for each frame
@@ -25,6 +20,9 @@ class CurrentConsumer(AsyncWebsocketConsumer):
         await self.close()
         # Or add a custom WebSocket error code!
         await self.close(code=4123)
+
+    async def send_current(self):
+        await self.send(text_data="some currend data")
 
     async def disconnect(self, close_code):
         # Called when the socket closes

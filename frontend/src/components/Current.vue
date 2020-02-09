@@ -11,6 +11,20 @@ export default {
     return {
       current: 100
     }
+  },
+  mounted () {
+    let chatSocket = new WebSocket('ws://' + window.location.host + '/ws/current/')
+
+    chatSocket.onmessage = function (e) {
+      console.log(e)
+      // let data = JSON.parse(e.data)
+      // let message = data['message']
+      // document.querySelector('#chat-log').value += (message + '\n')
+    }
+
+    chatSocket.onclose = function () {
+      console.error('Chat socket closed unexpectedly')
+    }
   }
 }
 </script>
